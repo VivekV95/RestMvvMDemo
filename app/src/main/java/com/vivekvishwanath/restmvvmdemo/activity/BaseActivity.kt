@@ -5,6 +5,7 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.vivekvishwanath.restmvvmdemo.R
+import kotlinx.android.synthetic.main.activity_base.*
 
 abstract class BaseActivity: AppCompatActivity() {
 
@@ -16,7 +17,7 @@ abstract class BaseActivity: AppCompatActivity() {
         progressBar = constraintLayout.findViewById(R.id.progress_bar)
 
         layoutInflater.inflate(layoutResID, frameLayout, true)
-        super.setContentView(layoutResID)
+        super.setContentView(constraintLayout)
     }
 
     fun showProgressBar(visibility: Boolean) {
