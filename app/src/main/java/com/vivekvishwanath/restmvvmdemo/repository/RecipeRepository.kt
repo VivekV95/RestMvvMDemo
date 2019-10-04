@@ -3,10 +3,15 @@ package com.vivekvishwanath.restmvvmdemo.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.vivekvishwanath.restmvvmdemo.model.Recipe
+import com.vivekvishwanath.restmvvmdemo.requests.RecipeApiClient
 
 class RecipeRepository {
 
-    var mRecipes: MutableLiveData<List<Recipe>>? = null
+    private var recipeApiClient: RecipeApiClient? = null
+
+    init {
+        recipeApiClient = RecipeApiClient.instance
+    }
 
     companion object {
         var instance: RecipeRepository? = null
@@ -17,11 +22,7 @@ class RecipeRepository {
             }
     }
 
-    init {
-        mRecipes = MutableLiveData()
-    }
-
-    fun getRecipes(): LiveData<List<Recipe>>? {
-        return mRecipes
+    fun getRecipes(): LiveData<MutableList<Recipe>>? {
+        return recipeApiClient?.mRecipes
     }
 }

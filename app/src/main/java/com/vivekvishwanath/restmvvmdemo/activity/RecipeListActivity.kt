@@ -33,7 +33,7 @@ class RecipeListActivity : BaseActivity() {
     }
 
     fun subscribeObservers() {
-        mRecipeListViewModel?.mRecipes?.observe(this, Observer {
+        mRecipeListViewModel?.getRecipes()?.observe(this, Observer {
 
         } )
     }

@@ -10,10 +10,10 @@ class RecipeListViewModel: ViewModel() {
     private var mRecipeRepository: RecipeRepository? = null
 
     init {
-        mRecipeRepository = RecipeRepository()
+        mRecipeRepository = RecipeRepository.instance
     }
 
-    fun getRecipes(): LiveData<List<Recipe>>? {
+    fun getRecipes(): LiveData<MutableList<Recipe>>? {
         return mRecipeRepository?.getRecipes()
     }
 
