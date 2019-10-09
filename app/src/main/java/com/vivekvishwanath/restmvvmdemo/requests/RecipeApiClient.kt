@@ -15,6 +15,7 @@ class RecipeApiClient {
 
     var mRecipes: MutableLiveData<MutableList<Recipe>>? = null
         private set
+    private var mRetrieveRecipesRunnable: RetrieveRecipesRunnable? = null
 
     init {
         mRecipes = MutableLiveData()
@@ -29,10 +30,9 @@ class RecipeApiClient {
             }
     }
 
-    fun searchRecipesApi() {
-        val handler = AppExecutors.instance?.mNetworkIO?.submit(Runnable {
-
-        })
+    fun searchRecipesApi(query: String, pageNumber: Int) {
+        mRetrieveRecipesRunnable = RetrieveRecipesRunnable(query, pageNumber)
+        val handler = AppExecutors.instance?.mNetworkIO?.submit(mRetrieveRecipesRunnable)
 
         AppExecutors.instance?.mNetworkIO?.schedule(Runnable {
             // Let the user know it's timed out
