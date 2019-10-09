@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vivekvishwanath.restmvvmdemo.R
 import com.vivekvishwanath.restmvvmdemo.model.Recipe
-import kotlinx.android.synthetic.main.layout_recipe_list_item.view.*
 import kotlin.math.roundToInt
 
 class RecipeRecyclerAdapter(val mRecipes: ArrayList<Recipe>, private val mOnRecipeListener: OnRecipeListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

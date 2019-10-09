@@ -5,7 +5,6 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.vivekvishwanath.restmvvmdemo.R
-import kotlinx.android.synthetic.main.activity_base.*
 
 abstract class BaseActivity: AppCompatActivity() {
 

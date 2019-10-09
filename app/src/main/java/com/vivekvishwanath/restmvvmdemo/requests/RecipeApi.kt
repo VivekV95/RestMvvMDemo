@@ -2,7 +2,6 @@ package com.vivekvishwanath.restmvvmdemo.requests
 
 import com.vivekvishwanath.restmvvmdemo.model.RecipeResponse
 import com.vivekvishwanath.restmvvmdemo.model.RecipeSearchResponse
-import com.vivekvishwanath.restmvvmdemo.util.Constants.API_KEY
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
