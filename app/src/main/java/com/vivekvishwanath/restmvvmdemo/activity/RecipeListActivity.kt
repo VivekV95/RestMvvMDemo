@@ -29,13 +29,18 @@ class RecipeListActivity : BaseActivity() {
         setContentView(R.layout.activity_recipe_list)
 
         mRecipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel::class.java)
-
+        subscribeObservers()
+        searchRecipesApi("chicken breast", 1)
     }
 
-    fun subscribeObservers() {
+    private fun subscribeObservers() {
         mRecipeListViewModel?.getRecipes()?.observe(this, Observer {
-
+            val i = 0
         } )
+    }
+
+    private fun searchRecipesApi(query: String, pageNumber: Int) {
+        mRecipeListViewModel?.searchRecipesApi(query, pageNumber)
     }
 
     /* fun testRetrofitRequest() {

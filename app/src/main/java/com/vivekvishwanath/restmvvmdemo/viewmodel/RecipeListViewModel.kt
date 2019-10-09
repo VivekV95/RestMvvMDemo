@@ -17,4 +17,8 @@ class RecipeListViewModel: ViewModel() {
         return mRecipeRepository?.getRecipes()
     }
 
+    fun searchRecipesApi(query: String, pageNumber: Int) {
+        mRecipeRepository?.searchRecipesApi(query, pageNumber)
+    }
+
 }
