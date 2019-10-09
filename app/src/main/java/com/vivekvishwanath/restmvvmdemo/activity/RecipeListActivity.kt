@@ -6,7 +6,11 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.vivekvishwanath.restmvvmdemo.R
+import com.vivekvishwanath.restmvvmdemo.adapter.OnRecipeListener
+import com.vivekvishwanath.restmvvmdemo.adapter.RecipeRecyclerAdapter
+import com.vivekvishwanath.restmvvmdemo.model.Recipe
 import com.vivekvishwanath.restmvvmdemo.model.RecipeResponse
 import com.vivekvishwanath.restmvvmdemo.model.RecipeSearchResponse
 import com.vivekvishwanath.restmvvmdemo.requests.ServiceGenerator
@@ -21,6 +25,18 @@ class RecipeListActivity : BaseActivity() {
     companion object {
         const val TAG = "RecipeListActivity"
     }
+    var count = 1
+    private var recipeAdapter = RecipeRecyclerAdapter(arrayListOf(Recipe("Blalala",
+        "feff", "efewgg", 5f, listOf("fef"), "ee")), object : OnRecipeListener {
+        override fun onRecipeClick(position: Int) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun onCategoryClick(category: String) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+    })
 
     private var mRecipeListViewModel: RecipeListViewModel? = null
 
@@ -30,12 +46,21 @@ class RecipeListActivity : BaseActivity() {
 
         mRecipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel::class.java)
         subscribeObservers()
-        searchRecipesApi("chicken breast", 1)
+
+        recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@RecipeListActivity)
+            adapter = recipeAdapter
+        }
+
+        test.setOnClickListener {
+            searchRecipesApi("chicken breast", count++)
+        }
     }
 
     private fun subscribeObservers() {
         mRecipeListViewModel?.getRecipes()?.observe(this, Observer {
-            val i = 0
+            recipeAdapter.setRecipes(it)
         } )
     }
 

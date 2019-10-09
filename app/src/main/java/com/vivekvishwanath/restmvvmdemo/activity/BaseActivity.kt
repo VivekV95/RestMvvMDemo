@@ -16,6 +16,7 @@ abstract class BaseActivity: AppCompatActivity() {
         val frameLayout = constraintLayout.findViewById<FrameLayout>(R.id.activity_content)
         progressBar = constraintLayout.findViewById(R.id.progress_bar)
 
+
         layoutInflater.inflate(layoutResID, frameLayout, true)
         super.setContentView(constraintLayout)
     }
