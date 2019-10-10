@@ -11,22 +11,21 @@ import com.vivekvishwanath.restmvvmdemo.viewmodel.RecipeListViewModel
 import kotlinx.android.synthetic.main.activity_recipe_list.*
 
 
-class RecipeListActivity : BaseActivity() {
+class RecipeListActivity : BaseActivity(), OnRecipeListener {
+
+    override fun onRecipeClick(position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onCategoryClick(category: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     companion object {
         const val TAG = "RecipeListActivity"
     }
 
-    private var recipeAdapter = RecipeRecyclerAdapter(arrayListOf(), object : OnRecipeListener {
-
-        override fun onRecipeClick(position: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun onCategoryClick(category: String) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-    })
+    private var recipeAdapter: RecipeRecyclerAdapter? = null
 
     private var mRecipeListViewModel: RecipeListViewModel? = null
 
@@ -37,20 +36,27 @@ class RecipeListActivity : BaseActivity() {
         mRecipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel::class.java)
         subscribeObservers()
 
-        recycler_view.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@RecipeListActivity)
-            adapter = recipeAdapter
-        }
+        initRecyclerView()
 
         test.setOnClickListener {
             searchRecipesApi("chicken breast", 1)
         }
     }
 
+    private fun initRecyclerView() {
+        recipeAdapter = RecipeRecyclerAdapter(this)
+        recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@RecipeListActivity)
+            adapter = recipeAdapter
+        }
+    }
+
     private fun subscribeObservers() {
-        mRecipeListViewModel?.getRecipes()?.observe(this, Observer {
-            recipeAdapter.setRecipes(it)
+        mRecipeListViewModel?.getRecipes()?.observe(this, Observer {recipes ->
+            recipes?.let {
+                recipeAdapter?.setRecipes(it)
+            }
         } )
     }
 
